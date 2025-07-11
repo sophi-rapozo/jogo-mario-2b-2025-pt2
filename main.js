@@ -1,31 +1,20 @@
 const mario = document.querySelector(".mario")
 const pipe = document.querySelector(".pipe")
+const nuvem = document.querySelector(".nuvem")
+const starButton = document.querySelector(".star") 
+const gameOverScreen = document.querySelector(".game-over")
+const scoreElement = document.querySelector(".score")
 
-const jump = () => {
-    mario.classList.add("jump");
+AudioStart = new Audio("./sound/audio_theme.mp3"):
+const gameOverSound = new Audio("./sound/audio_gameover.mp3");
 
-    setTimeout(() => {
-        mario.classList.remove("jump");
-    }
-    ,500);
+let gameStarted = false;
+let score = 0;
+
+const startGame = () => {
+    gameStarted = true;
+    audioStart.play();
+
+    pipe.computedStyleMap.animation ="pipe-animation 1.5s"
+
 }
-
-const loop = setInterval(() => {
-const pipePosition = pipe.offsetLeft;
-const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
-
-    if(pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
-        pipe.style.animation = "none";
-        pipe.style.left = `${pipePosition}px`;
-
-        mario.style.animation = "none";
-        mario.style.left = `${marioPosition}px`;
-
-        mario.src = "./img/game-over.png";
-        mario.style.width = "75px";
-        mario.style.marginLeft = "50px";
-
-        clearInterval(loop);
-    }
-},10);
-document.addEventListener("keydown", jump);
